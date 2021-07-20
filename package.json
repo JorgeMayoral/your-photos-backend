@@ -1,5 +1,5 @@
 {
-  "name": "typescript-api-skeleton",
+  "name": "your-photos-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,8 +11,8 @@
     "lint:fix": "npm run lint -- --fix",
     "test": "jest --verbose"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Jorge Mayoral Álvarez",
+  "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.12",
     "@types/jest": "^26.0.23",
