@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import asyncHandler from "express-async-handler";
 import { UploadedFile } from "express-fileupload";
 
 import {
@@ -17,18 +18,21 @@ export const getPhotos = (req: Request, res: Response): void => {
   });
 };
 
-export const getUserPhotos = (req: Request, res: Response): void => {
-  const userId = Number(req.params.id);
+export const getUserPhotos = asyncHandler(
+  async (req: AuthorizedRequest, res: Response): Promise<void> => {
+    const userId = req.user!.id;
 
-  if (!userId || isNaN(userId)) {
-    res.status(400);
-    res.json({ error: "Missing user id" });
+    if (!userId || isNaN(userId)) {
+      res.status(400);
+      throw new Error("Missing user id");
+    } else {
+      const data = await findUserPhotos(userId);
+
+      res.status(200);
+      res.json({ data });
+    }
   }
-
-  findUserPhotos(userId).then((data) => {
-    res.status(200).json({ data });
-  });
-};
+);
 
 export const getPhotoById = (req: Request, res: Response): void => {
   const photoId = Number(req.params.id);

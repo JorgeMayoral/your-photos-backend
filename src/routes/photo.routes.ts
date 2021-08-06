@@ -12,7 +12,7 @@ import { protect } from "../middleware/auth.middleware";
 
 const router = Router();
 
-router.route("/user/:id").get(getUserPhotos);
+router.route("/user").get(protect, getUserPhotos);
 router
   .route("/:id")
   .get(getPhotoById)
