@@ -15,7 +15,7 @@ This is a repository intended to serve as a starting point if you want to bootst
 
 ## Running the app
 
-```
+```bash
 # install dependencies
 npm install
 
@@ -33,13 +33,13 @@ npm run start
 
 ### Jest with supertest
 
-```
+```bash
 npm run test
 ```
 
 ## Linting
 
-```
+```bash
 # run linter
 npm run lint
 
