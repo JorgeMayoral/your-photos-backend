@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  postgres_your_photos:
+    image: 'postgres:13'
+    container_name: 'postgres_your_photos'
+    volumes:
+      - ${PWD}/db:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    expose:
+      - 5432
+    restart: always
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - PGDATA='/var/lib/postgresql/data/pgdata'
+
+  your_photos_backend:
+    image: 'y0rch/your-photos-backend:latest'
+    container_name: 'your_photos_backend'
+    ports:
+      - '${PORT}:${PORT}'
+    expose:
+      - ${PORT}
+    restart: always
+    environment:
+      - PORT
+      - DATABASE_URL
+      - JWT_SECRET_KEY
+    depends_on:
+      - postgres_your_photos
